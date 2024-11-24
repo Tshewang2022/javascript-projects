@@ -50,11 +50,66 @@ const person = {
 
 // new binding
 
-function Person(name) {
-    // this={}
-    this.name = name;
+// function Person(name) {
+//     // this={}
+//     this.name = name;
+// }
+
+// const p1 = new Person('TSHEWANG');
+// const p2 = new Person('gyaltshen');
+// console.log(p1.name);
+
+// function prototype in js
+
+// function Person(fName, lName) {
+//     this.firstName = fName,
+//         this.lastName = lName
+// }
+// const person1 = new Person('Bruce', 'Wayne');
+// const person2 = new Person('Tshewang', 'Gyaltshen');
+
+// // attaching the new objects
+// Person.prototype.getFullName = function () {
+//     return this.firstName + " " + this.lastName
+// }
+// console.log(person1.getFullName());
+
+
+// // inheritance concept
+// function superHero(fName, lName) {
+//     Person.call(this, fName, lName)
+//     this.isSuperHero = true;
+// }
+// superHero.prototype.fightCrime = function () {
+//     console.log('figthing crime')
+// }
+
+// // to inherit getFullName
+// superHero.prototype = Object.create(Person.prototype);
+// const batman = new superHero('bruce', 'wayna');
+
+
+class Person {
+    constructor(fName, lName) {
+        this.firstName = fName,
+            this.lastName = lName
+    }
+    sayMyName() {
+        return this.firstName + " " + this.lastName
+    }
 }
 
-const p1 = new Person('TSHEWANG');
-const p2 = new Person('gyaltshen');
-console.log(p1.name);
+const classP1 = new Person('Bruce', 'Wayne')
+console.log(classP1.sayMyName());
+
+class SuperHero extends Person {
+    constructor(fName, lName) {
+        super(fName, lName);
+        this.isSuperHero = true
+    }
+    fightingCrime(){
+        console.log('figthing crime')
+    }
+}
+const batman = new SuperHero('tshewang', 'gayltshen');
+console.log(batman.sayMyName());
