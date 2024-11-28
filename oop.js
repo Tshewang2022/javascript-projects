@@ -54,6 +54,7 @@ const PersonClq = class {
 // class delcaration
 class PersonCl {
     // add the constructor methods, its just like the constructor functions that we have seen
+    // all are the inherited methods
     constructor(firstName, birthYear) {
         this.firstName = firstName;
         this.birthYear = birthYear;
@@ -62,6 +63,11 @@ class PersonCl {
     // this is a prototype property, methods will added to .prototype prototype
     calcAge() {
         console.log(2024 - this.birthYear);
+    }
+
+    // static methods, 
+    static hey() {
+
     }
 }
 const jessica = new PersonCl('jessica', 1900);
@@ -75,12 +81,42 @@ console.log(jessica);
 
 
 // every objects will have getter and setter property
-
 const account = {
-    ower : "tshewang",
-    movements: [200, 520, 120, 202]
-     get lastest(){
+    ower: "tshewang",
+    movements: [200, 520, 120, 202],
 
+    // setting the setters and getters
+    get lastest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set lastest(mov) {
+        this.movements.push(mov);
+    },
+
+
+
+}
+
+console.log(account.lastest);
+account.set = 50;
+
+// implementing the prototyple inheritance
+// using the Object.create(), manually set the prototype of the object
+
+const PersonProto = {
+    calcAge(){
+        console.log(2023-this.birthYear);
+    },
+    init(firstName, birthYear){
+        this.firstName = firstName;
+        this.birthYear = birthYear
     }
 
 }
+const tshewang2 = Object.create(PersonProto);
+tshewang2.name = 'tshewang gyaltshen';
+tshewang2.birthYear = 1990;
+tshewang2.calcAge();
+tshewang2.init('sara', 1990);
+tshewang2.calcAge();
