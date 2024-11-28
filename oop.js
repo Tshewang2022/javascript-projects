@@ -254,7 +254,6 @@ class account {
         return this._movements;
     }
 }
-
 const account1 = new account('tshewang', 'EUR', 111);
 account1.deposit(250);
 account1.withdraw(140);

@@ -1,115 +1,43 @@
-// the concept of the nested functions scopes
+const express = require('express');
 
-// let a = 10;
-// function outer() {
-//     let b = 40;
-//     function inner() {
-//         let c = 80;
-//         console.log(a, b, c);
-//     }
-//     inner();
-// }
-// outer();
-
-//understanding the closure
-
-// function outer(){
-//     let counter = 0;
-//     function inner(){
-//         counter ++;
-//         console.log(counter);
-//     }
-//     return inner;
-// }
-// const ok = outer();
-// ok();
-// ok();
+const main = express();
 
 
-// function myName(name) {
-//     console.log(`my name is ${name}`);
-// }
-// myName('tshewang');
+const PORT = 3000;
+main.use(express.json());
+main.use('/', (req, res) => {
+    //simple datatypes, arrays
+    // const arr = ['tshewang', 'gyaltshen', 'error', 1];
+    // const user = {
+    //     name: "phurpa",
+    //     email: "phurpa@gmail.com",
+    //     company: "newegde.bt"
+    // }
 
-// understanding the this keyword is js(implicit, explicit, new, default)
-
-// implicit binding
-const person = {
-    name: "tshewang",
-    sayMyName: function () {
-        console.log(`my name is ${this.name}`);
+    // what is constructor function, simple functions that has capital
+    function Person(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
     }
-}
-//person.sayMyName();
+    const yanchen = new Person('yangchen', 1020);
+    console.log(yanchen);
+    // console.log(Person.firstName);
+    res.status(200).json({
+        message: "get all the messages"
+    })
+})
 
-// explicit
-// function sayMyName() {
-//     console.log(`my name is ${this.name}`);
-// }
-// sayMyName.call(person);
-
-// new binding
-
-// function Person(name) {
-//     // this={}
-//     this.name = name;
-// }
-
-// const p1 = new Person('TSHEWANG');
-// const p2 = new Person('gyaltshen');
-// console.log(p1.name);
-
-// function prototype in js
-
-// function Person(fName, lName) {
-//     this.firstName = fName,
-//         this.lastName = lName
-// }
-// const person1 = new Person('Bruce', 'Wayne');
-// const person2 = new Person('Tshewang', 'Gyaltshen');
-
-// // attaching the new objects
-// Person.prototype.getFullName = function () {
-//     return this.firstName + " " + this.lastName
-// }
-// console.log(person1.getFullName());
+main.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}`);
+})
 
 
-// // inheritance concept
-// function superHero(fName, lName) {
-//     Person.call(this, fName, lName)
-//     this.isSuperHero = true;
-// }
-// superHero.prototype.fightCrime = function () {
-//     console.log('figthing crime')
-// }
-
-// // to inherit getFullName
-// superHero.prototype = Object.create(Person.prototype);
-// const batman = new superHero('bruce', 'wayna');
-
-
-class Person {
-    constructor(fName, lName) {
-        this.firstName = fName,
-            this.lastName = lName
-    }
-    sayMyName() {
-        return this.firstName + " " + this.lastName
-    }
-}
-
-const classP1 = new Person('Bruce', 'Wayne')
-console.log(classP1.sayMyName());
-
-class SuperHero extends Person {
-    constructor(fName, lName) {
-        super(fName, lName);
-        this.isSuperHero = true
-    }
-    fightingCrime(){
-        console.log('figthing crime')
-    }
-}
-const batman = new SuperHero('tshewang', 'gayltshen');
-console.log(batman.sayMyName());
+// main practice of the oop concepts in javascript
+/* 
+    1.construtor functions,
+    2.protoype inheritance
+    3.class
+    4. methods and property
+    5. Object.create
+    6. objects
+*/
