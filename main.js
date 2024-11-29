@@ -21,6 +21,7 @@ main.use('/', (req, res) => {
     }
     const yanchen = new Person('yangchen', 1020);
     console.log(yanchen);
+    console.log('this')
     // console.log(Person.firstName);
     res.status(200).json({
         message: "get all the messages"
