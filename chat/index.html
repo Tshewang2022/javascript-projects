@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat application</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #messages li:nth-child(odd) {
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>chat application</h1>
+    <ul id="messages"></ul>
+    <form action="" id="form">
+        <input type="text" id="input" autocomplete="off" />
+        <button>Send</button>
+    </form>
+
+    <script>
+        // select the dom element
+        const form = document.getElementById("form");
+        const input = document.getElementById("input");
+
+        // create instance of socket
+        const socket = io();
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (input.value) {
+
+                // providing the data to server
+                socket.emit("chat message", input.value);
+                input.value = "";
+            }
+        })
+
+        // to recieve the data from the server
+        socket.on("chat message", (msg) => {
+            const item = document.createElement("li");
+            item.textContent = msg;
+            document.getElementById("messages").appendChild(item);
+        })
+    </script>
+</body>
+
+</html>
