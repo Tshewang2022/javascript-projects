@@ -52,6 +52,7 @@ const Person = function (firstName, birthYear) {
 }
 
 const tshewang = new Person('Tshewang', 1990);
+const dorji = new Person('Dorji', 2030);
 console.log(tshewang);
 
 // behind the scene
@@ -61,3 +62,75 @@ console.log(tshewang);
 // 4. function automatically return {}
 
 // instead use the prototype
+Person.prototype.calcAge = function () {
+    console.log(2034 - this.birthYear);
+}
+console.log(Person.prototype);
+tshewang.calcAge();
+dorji.calcAge();
+
+// prototype of the aray
+const arr = [3, 4, 5, 5, 6];
+// __proto__ is the powerful methods to debug and write some code
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+// adding your own methods to prototype, but should not do it
+// in the production env
+Array.prototype.unique = function () {
+    return [...new Set(this)];
+}
+console.log(arr.unique());
+
+class PersonCl {
+    // constructor in javascript
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+
+    // methods
+    calcAge() {
+        console.log(3030 - birthYear);
+    }
+}
+
+// class instance or called as the object
+const jessica = new PersonCl('tshewang', 9830);
+console.log(jessica);
+
+// 1. classes are not hoisted
+// 2. classes are first-class citizens
+// 3. classes are executed in strict mode
+
+// setters and getters in objects 
+
+// simple object literals
+const bankAccout = {
+    owener: 'tshewang',
+    movements: [200, 530, 120],
+
+    // setting up the getter function
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);
+    },
+
+    // set the property that i have already exist
+    set fullName(name) {
+        if (name.includes(' ')) return this._fullName;
+        else {
+            return `${name} is not full name`
+        }
+    },
+
+    get fullName() {
+        return this._fullName;
+    }
+}
+
+console.log(account.latest);
+account.latest(50);
