@@ -80,32 +80,71 @@ const createUsername = function (accs) {
         acc.username = acc.owner.toLowerCase().split(' ').map((name) => name[0]).join('');
     })
 };
-
+createUsername(accounts);
 const calcPrintBalance = function (movement) {
     const balance = movement.reduce((acc, curr) => acc + curr, 0);
     console.log(balance);
     labelBalance.textContent = `${balance} USD`;
 }
 calcPrintBalance(account1.movements);
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+    //prevent the automatic reload when the function is being clicked
+    e.preventDefault();
+    currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+    if (currentAccount?.pin === Number(inputLoginPin.value)) {
+        // diplay ui and welcome message
+        labelWelcome.textContent = `Welcome back,${currentAccount.owner.split(' ')[0]}`;
+        containerApp.style.opacity = 100;
+
+        // display movements
+
+
+        // display balance
+
+
+        // display summary
+        console.log('login')
+    }
+    console.log('login to the function');
+})
+btnTransfer.addEventListener('click', function () {
+    const amount = Number(inputTransferAmount.value);
+    const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+    console.log(amount, receiverAcc);
+
+    if(amount>0 && balan ){}
+})
 const currencies = new Map([
     ['USD', 'United States dollar'],
     ['EUR', 'Euro'],
     ['GBP', 'Pound sterling'],
 ]);
 
+// simplicity in the code is the best thing you can do for yourself
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /**  3 popular array methods(map(to loop over the arrays, will get the new array of the original arr),
  fliter=> returns the new array based on the test condition
    and reducer=> reduces all the arrays elements down to the one single array is called as the reducer); **/
 
-// working of the filter methods of the array
+// working of the filter methods of the array, combine all the dots and create something that you always wanted to create
+// the freedom of expression of the ideas into the functional codes
 
-const maxVal = movements.reduce(function (acc, curr) {
-    if (acc < curr)
-        return curr;
-    else
-        return acc
-}, movements[0]);
+// const maxVal = movements.reduce(function (acc, curr) {
+//     if (acc < curr)
+//         return curr;
+//     else
+//         return acc
+// }, movements[0]);
 
-console.log(maxVal, 'max value');
+// console.log(maxVal, 'max value');
+
+// i am just copying the other styles, and that is what is not working for me and not enjoying the process.
+// change in the approach, where i will be doing 80% myself and 20% watching others do
+// find is use the find the property of the array or the object
+// movements.find((mov) => mov < 0);
+// const accountt = ['tshewang', 'dorji'];
+// const account = accountt.find(acc => acc === 'tshewang');
+// console.log(account, 'value');
+
