@@ -132,5 +132,19 @@ const bankAccout = {
     }
 }
 
-console.log(account.latest);
-account.latest(50);
+// console.log(account.latest);
+// account.latest(50);
+
+// Object.create to create the prototypal inheritance
+const obje2 = {
+    calcAge() {
+        console.log('year');
+    }
+}
+
+const proto = Object.create(obje2);
+console.log(proto);
+
+// complete lock on the creativity and the productivity
+// my attension is all scattered around the things that does not even matter to me, or
+// it does not provide the real growth to me, need to dig down and find the fault in it

@@ -265,4 +265,51 @@ console.log(account1.getMovements());
 // encapsulation, ->data privacy
 
 // private class fields and methods ->encapsulation
+// somehow the things that i have learned does not get connected while i am working on the project.
+const Person3 = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+}
 
+// this is the server side code
+const Student = function (firstName, birthYear, course) {
+
+    // inherit the properties from the Person3
+    Person3.call(this, firstName, birthYear);
+    this.course = course
+}
+Student.prototype.introduce = function () {
+    console.log(`My name is ${this.firstName} and i study ${this.course}`)
+}
+
+// this is the client side code
+const mike = new Student('mike', 1990, 'computer science');
+console.log(mike);
+
+
+//using the es6 class
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+    calcAge() {
+        console.log(2024 - this.birthYear);
+    }
+}
+
+
+// extends keyword will setup the prototype chain for us
+class StudentCl extends PersonCl {
+    constructor(firstName, birthYear, course) {
+        // inherit the properties from the Person3
+        // super => PersonCl.call(this, firstName, birthYear);
+        super(firstName, birthYear);
+        this.course = course
+    }
+    introduce() {
+        console.log(`My name is ${this.firstName} and i study ${this.course}`)
+    }
+}
+
+const tshewang = new StudentCl('tshewang', 1990, 'computer science');
