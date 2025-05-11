@@ -313,3 +313,153 @@ class StudentCl extends PersonCl {
 }
 
 const tshewang = new StudentCl('tshewang', 1990, 'computer science');
+
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+}
+
+// creating the prototype chain
+const steven = Object.create(PersonProto);
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firsName, birthYear) {
+    this.course = this.course;
+}
+
+// Object.create linking the object togather
+const jay = Object.create(StudentProto);
+jay.init('tshewang', 2020, 'computer science')
+
+
+// this is the server side code
+class Account {
+    #movements = [] // this is the private property
+    locale = navigator.nivations // this public property
+    // init the class object
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+
+        this.movements = [];
+        this.locale = navigator.language;
+        console.log(`thank for opening an account, ${owner}`);
+    }
+
+    deposit(val) {
+        this.movements.push(val);
+        return this;
+    }
+
+    withdraw(val) {
+        this.deposit(-val);
+        return this;
+    }
+    approveLoan(val) {
+        return true;
+    }
+
+    requestLoan(val) {
+        if (this.approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Approved loan`);
+        }
+        // the methods of chaining
+        return this;
+    }
+}
+
+// this is the client side code
+const acct = new Account('Jonas', 'EUR', 111);
+
+// arguments
+acct.deposit(250);
+acct.withdraw(140);
+
+//output
+console.log(acct);
+
+// security risk
+acct.requestLoan(); // this should not be avaiable to anyone
+// thats why need need to encapsulation
+
+// i get up every day to be best of what i am really capable of, that is the moto of my life
+// push each and every inches of the life, because life fucks bad
+// they may not understand the thing about it, but every thing need to be calculated with precision to min risk
+// after all, everything is a strategy, you need too take risk, and do not play save, because you have nothing to lose
+
+/** chaining methods **/ // some can fool you very easily, because they seems very convincing to you, just be careful
+const chaining = acct.requestLoan().deposit(90).deposit(10).withdraw(90); // this is chaining methods, that we can commonly see in the object oriented programming
+
+console.log(chaining);
+class Car {
+
+}
+// challenging myself 
+class Carcl {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed} km/h`);
+    }
+
+    brake() {
+        this.speed -= 5;
+        console.log(`${this.make} is going at ${this.speed} km/h`);
+    }
+
+    get speedUS() {
+        return this.speed / 1.6;
+    }
+
+    set speedUS(speed) {
+        this.speed = this.speed * 1.6;
+    };
+
+
+}
+
+class EVCL extends Carcl {
+    // making the property private
+    #charge
+    constructor(make, speed, charge) {
+        supper(make, speed);
+        this.charge = charge;
+    }
+    chargeBattery(chargeTo) {
+        this.charge = chargeTo
+    }
+
+    accelerate() {
+        this.speed += 20;
+        this.#charge--;
+        console.log(`${this.make} is going at ${this.speed} km/h with charge of ${this.#charge}`);
+    }
+};
+
+const EV = function (make, speed, charge) {
+    Car.call(this, make, speed);
+    this.charge = charge;
+
+}
+
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.chargeBattery = function (chargeTo) {
+    this.charge = chargeTo;
+}
+
+EV.prototype.accelerate = function () {
+    this.speed += 20;
+    this.charge--;
+    console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}`);
+};// lets see how the code have been written inside the node_modules file
+
