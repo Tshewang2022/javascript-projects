@@ -20,3 +20,4 @@ if (navigator.geolocation) {
         alert('Cannot get your location')
     })
 }
+
